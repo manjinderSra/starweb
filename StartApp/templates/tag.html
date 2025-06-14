@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="bg-gradient-to-br from-black via-gray-900 to-gray-800 min-h-screen flex items-center justify-center text-white font-sans">
+    <div class="w-full max-w-md bg-gray-900 bg-opacity-80 p-8 rounded-2xl shadow-2xl ring-1 ring-gray-700 backdrop-blur-md">
+        <h1 class="text-3xl font-bold mb-6 text-center text-cyan-400 tracking-wide">🚀 Create a New Tag</h1>
+
+        {% if error %}
+            <div class="bg-red-500 text-white p-3 rounded mb-4 text-center">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            <div>
+                <label for="name" class="block text-sm font-medium mb-2 text-gray-300">Tag Name</label>
+                <input type="text" name="name" id="name" placeholder="Enter tag name"
+                       class="mt-1 block w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300" required>
+            </div>
+            <div class="flex justify-center">
+                <button type="submit"
+                        class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg">
+                    Add Tag
+                </button>
+            </div>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-gray-400">Return to <a href="{% url 'create_article' %}" class="text-cyan-400 hover:underline">Article</a></p>
+    </div>
+</div>
+{% endblock content %}

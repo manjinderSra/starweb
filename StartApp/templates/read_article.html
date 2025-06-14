@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-10 px-4">
+    <article class="bg-white dark:bg-gray-900 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl">
+        <header class="mb-6 border-b pb-4">
+           <div class='flex justify-between'>
+               <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white leading-tight">
+                   {{ article.title }}
+                </h1>
+                <a href="{% url 'EditArticle' article.pk %}" >
+                   <img src="https://img.icons8.com/?size=64&id=119550&format=png" class="w-12 h-12 hover:scale-105 transition duration-300" alt="Edit Article">
+                </a>
+            </div>
+            <p class="text-sm text-gray-500 mt-2 dark:text-gray-400">
+                Published on {{ article.created_at|date:"F d, Y" }} by <span class="font-semibold">{{ article.author }}</span>
+            </p>
+            <div class="mt-2 flex flex-wrap gap-2">
+                {% if article.category %}
+                    <span class="inline-block bg-cyan-100 text-cyan-800 text-xs px-2 py-1 rounded-full dark:bg-cyan-800 dark:text-white">
+                        {{ article.category.name }}
+                    </span>
+                {% endif %}
+                {% if article.tag %}
+                    <span class="inline-block bg-cyan-100 text-cyan-800 text-xs px-2 py-1 rounded-full dark:bg-cyan-800 dark:text-white">
+                        #{{ article.tag.name }}
+                    </span>
+                {% endif %}
+            </div>
+        </header>
+
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.title }} image" class="w-full h-64 object-cover rounded-xl mb-6">
+        {% endif %}
+
+        <section class="text-lg text-gray-800 dark:text-gray-300 leading-relaxed space-y-4">
+            {{ article.description|linebreaks }}
+        </section>
+    </article>
+
+    <div class="mt-10 text-center">
+        <a href="/" class="inline-block bg-cyan-500 text-white text-sm font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-cyan-600 transition">
+            ← Back to Home
+        </a>
+    </div>
+</div>
+{% endblock %}

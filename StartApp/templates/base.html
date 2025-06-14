@@ -1,0 +1,19 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% tailwind_css %}
+    
+</head>
+<body class="min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-900 text-white font-sans">
+
+
+
+        {% block navbar %}{% include "components/navbar.html" %}{% endblock navbar %}
+
+    {% block content %}{% endblock content %}
+</body>
+</html>
