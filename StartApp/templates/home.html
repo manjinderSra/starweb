@@ -8,7 +8,9 @@
     <p class="text-gray-300 text-lg">Explore curated content, discover new ideas, and stay updated with fresh articles.</p>
   </div>
 
-  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+  <!-- Local Articles Section -->
+  <h2 class="text-2xl font-semibold text-cyan-300 mb-6">🗂️ Local Articles</h2>
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-16">
     {% for article in articles %}
     <div class="bg-white/5 backdrop-blur-md border border-gray-700 rounded-xl shadow-md hover:shadow-cyan-500/30 transition duration-300 overflow-hidden">
       {% if article.image %}
@@ -27,10 +29,9 @@
         </div>
         {% if article.pk %}
         <a href="{% url 'ReadArticle' article.pk %}" class="inline-block mt-4 text-cyan-400 hover:underline">Read More →</a>
-      {% else %}
+        {% else %}
         <p class="text-red-500">No ID available</p>
-      {% endif %}
-      
+        {% endif %}
       </div>
     </div>
     {% empty %}
@@ -39,5 +40,23 @@
     </div>
     {% endfor %}
   </div>
+
+  <!-- External Articles Section -->
+  <h2 class="text-2xl font-semibold text-cyan-300 mb-6">🌐 External Articles</h2>
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {% for ext in external_data %}
+    <div class="bg-white/5 backdrop-blur-md border border-gray-700 rounded-xl shadow-md hover:shadow-cyan-500/30 transition duration-300 overflow-hidden">
+      <div class="p-6 space-y-3">
+        <h2 class="text-xl font-semibold text-cyan-300">{{ ext.title|truncatewords:10 }}</h2>
+        <p class="text-gray-300 text-sm">{{ ext.body|default:"No content available"|truncatewords:20 }}</p>
+        <div class="flex justify-between items-center text-sm text-gray-400 mt-4">
+          <span>External Source</span>
+          <span class="italic">User {{ ext.userId }}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
 </section>
 {% endblock %}

@@ -38,7 +38,9 @@ class Home(ListView):
     template_name = 'home.html'
     def get(self, req):
         articles = Article.objects.all()
-        return render(req, self.template_name, {'articles': articles})
+        external_response = requests.get('https://jsonplaceholder.typicode.com/posts')
+        external_data = external_response.json()
+        return render(req, self.template_name, {'articles': articles, 'external_data':external_data})
 
 class Register(CreateView):
     template_name = 'register.html'
